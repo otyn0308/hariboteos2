@@ -1,6 +1,7 @@
 ; heribote-ipl
 ; TAB=4
 
+CYLS    EQU     10              ;どこまで読み込むか
         ORG     0x7c00
 
 ; 以下は標準的なFAT12フォーマットフロッピーディスクのための記述
@@ -64,6 +65,13 @@ next:
         ADD     CL,1            ;CLに1を足す
         CMP     CL,18           ;CLと18を比較
         JBE     readloop        ;CL <= 18だったらreadloopへ
+        MOV     CL,1
+        ADD     DH,1
+        CMP     DH,2
+        JB      readloop        ;DH < 2だったらreadloopへ
+        MOV     CH,0
+        ADD     CH,CYLS
+        JB      readloop        ;CH < CYLSだったらreadloopへ
 fin:
 		HLT						;何かあるまでCPUを停止させる
 		JMP		fin				;無限ループ
