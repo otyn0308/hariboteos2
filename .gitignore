@@ -1,2 +1,4 @@
-ipl.bin
-ipl.lst
+*.lst
+
+*.bin
+*.img
