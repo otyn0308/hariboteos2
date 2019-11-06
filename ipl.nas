@@ -69,11 +69,12 @@ next:
         ADD     DH,1
         CMP     DH,2
         JB      readloop        ;DH < 2だったらreadloopへ
-        MOV     CH,0
+        MOV     DH,0
         ADD     CH,1
         CMP     CH,CYLS
         JB      readloop        ;CH < CYLSだったらreadloopへ
 
+        MOV     [0x0ff0],CH     ;IPLがどこまで読んだのかメモ
         JMP     0xc200
 
 error:
