@@ -70,8 +70,12 @@ next:
         CMP     DH,2
         JB      readloop        ;DH < 2だったらreadloopへ
         MOV     CH,0
-        ADD     CH,CYLS
+        ADD     CH,1
+        CMP     CH,CYLS
         JB      readloop        ;CH < CYLSだったらreadloopへ
+
+
+
 fin:
 		HLT						;何かあるまでCPUを停止させる
 		JMP		fin				;無限ループ

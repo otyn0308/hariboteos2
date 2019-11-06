@@ -1,5 +1,4 @@
 tools		=../hariboteos2/tools/
-make		=$(tools)make -r
 nask		=$(tools)nask
 edimg		=$(tools)edimg
 
@@ -10,9 +9,14 @@ default :
 ipl.bin : ipl.nas Makefile
 	$(nask) ipl.nas ipl.bin ipl.lst
 
-haribote.img : ipl.bin Makefile
-	$(edimg) imgin:$(tools)fdimg0at.tek \
-	  wbinimg src:ipl.bin len:512 from:0 to:0 imgout:haribote.img
+haribote.sys : haribote.nas Makefile
+	$(nask) haribote.nas haribote.sys haribote.lst
+
+haribote.img : ipl.bin haribote.sys Makefile
+	$(edimg) imgin:../hariboteos2/tools/fdimg0at.tek \
+	  wbinimg src:ipl.bin len:512 from:0 to:0 \
+	  copy from:haribote.sys to:@: \
+	  imgout:haribote.img
 
 
 asm :
@@ -28,6 +32,8 @@ run :
 crean :
 	rm ipl.bin
 	rm ipl.lst
+	rm haribote.sys
+	rm haribote.lst
 
 src_only :
 	make crean
