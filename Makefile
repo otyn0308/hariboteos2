@@ -27,11 +27,14 @@ bootpack.nas : bootpack.gas Makefile
 	$(GAS2NASK) bootpack.gas bootpack.nas
 
 bootpack.obj : bootpack.nas Makefile
-	$(NASK) bootpack.nas cootpack.obj bootpack.lst
+	$(NASK) bootpack.nas bootpack.obj bootpack.lst
+
+naskfunc.obj : naskfunc.nas Makefile
+	$(NASK) naskfunc.nas naskfunc.obj naskfunc.lst
 
 bootpack.bim : bootpack.obj Makefile
 	$(OBJ2BIM) @$(RULEFILE) out:bootpack.bim stack:3136k map:bootpack.map \
-	  bootpack.obj
+	  bootpack.obj naskfunc.obj
 
 bootpack.hrb : bootpack.bim Makefile
 	$(BIM2HRB) bootpack.bim bootpack.hrb 0

@@ -1,5 +1,8 @@
+void io_hlt(void);
+
 void HariMain(void){
 fin:
-  //ここにHLTを入れたいがC言語ではHLTがつかえない
+  io_hlt();
   goto fin;
 }
+
