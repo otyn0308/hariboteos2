@@ -50,7 +50,7 @@ VRAM    EQU     0x0ff8          ;グラフィックバッファの開始番地
 ;プロテクトモード移行
 [INSTRSET "i486p"]              ;486の命令まで使いたい
 
-        LGDT    [GOTO0]         ;暫定GDTを設定
+        LGDT    [GDTR0]         ;暫定GDTを設定
         MOV     EAX,CR0
         AND     EAX,0x7fffffff  ;bit31を0にする(ページング禁止のため)
         OR      EAX,0x00000001  ;bit0を1にする(プロテクトモード移行のため)
@@ -79,7 +79,7 @@ pipelineflush:
 
 ;残り全部
         MOV     ESI,DSKCAC0+512 ;転送元
-        MOV     EDI,DSCCAC+512  ;転送先
+        MOV     EDI,DSKCAC+512  ;転送先
         MOV     ECX,0
         MOV     CL,BYTE [CYLS]
         IMUL    ECX,512*18*2/4  ;シリンダ数からバイト数/4に変換
@@ -100,9 +100,9 @@ pipelineflush:
         CALL    memcpy
 skip:
         MOV     ESP,[EBX+12]    ;スタック初期値
-        JMP     DWORD 2*8:0000001b
+        JMP     DWORD 2*8:0x0000001b
 
-waikkbdout:
+waitkbdout:
         IN      AL,0x64
         AND     AL,0x02
         JNZ     waitkbdout

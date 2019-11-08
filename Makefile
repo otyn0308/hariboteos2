@@ -61,11 +61,11 @@ clean :
 	rm *.lst
 	rm *.gas
 	rm *.obj
+	rm *.sys
 	rm bootpack.hrb
 	rm bootpack.map
 	rm bootpack.bim
 	rm bootpack.nas
-	rm haribote.sys
 
 src_only :
 	make clean
