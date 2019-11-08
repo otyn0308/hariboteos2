@@ -15,6 +15,8 @@ VRAM    EQU     0x0ff8          ;グラフィックバッファの開始番地
 
         ORG     0xc200          ;このプログラムがどこに読み込まれるのか
 
+;画面モードを設定
+
         MOV     AL,0x13         ;VGAグラフィックス，320*320*8bitカラー
         MOV     AH,0x00
         INT     0x10
@@ -75,7 +77,7 @@ pipelineflush:
         MOV     ECX,512/4
         CALL    memcpy
 
-;他残り全部
+;残り全部
         MOV     ESI,DSKCAC0+512 ;転送元
         MOV     EDI,DSCCAC+512  ;転送先
         MOV     ECX,0
@@ -125,6 +127,5 @@ GDT0:
 GDTR0:
         DW      8*3-1
         DD      GDT0
-        ALIGNB16
+        ALIGNB  16
 bootpack:
-

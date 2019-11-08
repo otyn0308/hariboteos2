@@ -1,4 +1,4 @@
-; heribote-ipl
+; haribote-ipl
 ; TAB=4
 
 CYLS    EQU     10              ;どこまで読み込むか
@@ -23,8 +23,8 @@ CYLS    EQU     10              ;どこまで読み込むか
 		DD		2880			;このドライブ大きさをもう一度書く
 		DB		0,0,0x29		;よくわからないけどこの値にしておくといいらしい
 		DD		0xffffffff		;たぶんボリュームシリアル番号
-		DB		"HARIBOTEOS"	;ディスクの名前（11バイト）
-		DB		"FAT12"		    ;フォーマットの名前（8バイト）
+		DB		"HARIBOTEOS "	;ディスクの名前（11バイト）
+		DB      "FAT12   "		;フォーマットの名前（8バイト）
 		RESB	18				;とりあえず18バイトあけておく
 
 ; プログラム本体
@@ -50,7 +50,7 @@ retry:
         MOV     BX,0
         MOV     DL,0x00         ;Aドライブ
         INT     0x13            ;ディスクBIOS呼び出し
-        JNC     next             ;エラーが起きなければfinへ
+        JNC     next            ;エラーが起きなければnextへ
         ADD     SI,1            ;SIに1を足す
         CMP     SI,5            ;SIと5を比較
         JAE     error           ;SI >= 5 だったらerrorへ
