@@ -5,7 +5,9 @@ NASK	=$(TOOLS)nask
 EDIMG	=$(TOOLS)edimg
 CC1		=$(TOOLS)gocc1 -I$(INCPATH) -Os -Wall -quiet
 GAS2NASK=$(TOOLS)gas2nask -a
-OBJ2BIM	=$(TOOLS)obj2bim
+MAKEFONT=$(TOOLS)makefont
+BIN2OBJ =$(TOOLS)bin2obj
+OBJ2BIM =$(TOOLS)obj2bim
 BIM2HRB	=$(TOOLS)bim2hrb
 RULEFILE=$(INCPATH)haribote.rul
 HARITOL	=$(TOOLS)haritol
@@ -32,9 +34,15 @@ bootpack.obj : bootpack.nas Makefile
 naskfunc.obj : naskfunc.nas Makefile
 	$(NASK) naskfunc.nas naskfunc.obj naskfunc.lst
 
-bootpack.bim : bootpack.obj naskfunc.obj Makefile
+hankaku.bin : hankaku.txt Makefile
+	$(MAKEFONT) hankaku.txt hankaku.bin
+
+hankaku.obj : hankaku.bin Makefile
+	$(BIN2OBJ) hankaku.bin hankaku.obj _hankaku
+
+bootpack.bim : bootpack.obj naskfunc.obj hankaku.obj Makefile
 	$(OBJ2BIM) @$(RULEFILE) out:bootpack.bim stack:3136k map:bootpack.map \
-	  bootpack.obj naskfunc.obj
+	  bootpack.obj naskfunc.obj hankaku.obj
 
 bootpack.hrb : bootpack.bim Makefile
 	$(BIM2HRB) bootpack.bim bootpack.hrb 0
