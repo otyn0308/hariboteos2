@@ -61,15 +61,11 @@ run :
 clean :
 	rm *.bin
 	rm *.lst
-	rm *.gas
 	rm *.obj
 	rm *.sys
 	rm bootpack.hrb
 	rm bootpack.map
 	rm bootpack.bim
-	rm bootpack.nas
-	rm graphic.nas
-	rm dsctbl.nas
 
 src_only :
 	make clean
