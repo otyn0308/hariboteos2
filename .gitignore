@@ -4,6 +4,8 @@
 *.gas
 *.obj
 bootpack.nas
+graphic.nas
+dsctbl.nas
 bootpack.map
 bootpack.bim
 bootpack.hrb
