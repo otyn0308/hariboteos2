@@ -7,6 +7,7 @@ bootpack.nas
 graphic.nas
 dsctbl.nas
 int.nas
+fifo.nas
 bootpack.map
 bootpack.bim
 bootpack.hrb

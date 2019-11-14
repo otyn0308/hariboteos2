@@ -47,14 +47,14 @@ void boxfill8(unsigned char *vram, int xsize, unsigned char c, int x0, int y0, i
   return;
 }
 
-void init_screen(char *vram, int x, int y){
-  boxfill8(vram, x, COL8_008484,  0,     0,          x -  1, y - 29);
+void init_screen8(char *vram, int x, int y){
+  boxfill8(vram, x, COL8_008484,  0,     0,      x -  1, y - 29);
   boxfill8(vram, x, COL8_C6C6C6,  0,     y - 28, x -  1, y - 28);
   boxfill8(vram, x, COL8_FFFFFF,  0,     y - 27, x -  1, y - 27);
   boxfill8(vram, x, COL8_C6C6C6,  0,     y - 26, x -  1, y -  1);
 
   boxfill8(vram, x, COL8_FFFFFF,  3,     y - 24, 59,     y - 24);
-  boxfill8(vram, x, COL8_FFFFFF,  2,     y - 26,  2,     y -  4);
+  boxfill8(vram, x, COL8_FFFFFF,  2,     y - 24,  2,     y -  4);
   boxfill8(vram, x, COL8_848484,  3,     y -  4, 59,     y -  4);
   boxfill8(vram, x, COL8_848484, 59,     y - 23, 59,     y -  5);
   boxfill8(vram, x, COL8_000000,  2,     y -  3, 59,     y -  3);
@@ -63,7 +63,7 @@ void init_screen(char *vram, int x, int y){
   boxfill8(vram, x, COL8_848484, x - 47, y - 24, x -  4, y - 24);
   boxfill8(vram, x, COL8_848484, x - 47, y - 23, x - 47, y -  4);
   boxfill8(vram, x, COL8_FFFFFF, x - 47, y -  3, x -  4, y -  3);
-  boxfill8(vram, x, COL8_FFFFFF, x -  3, y -  4, x -  3, y -  3);
+  boxfill8(vram, x, COL8_FFFFFF, x -  3, y - 24, x -  3, y -  3);
   return;
 }
 
@@ -73,19 +73,19 @@ void putfont8(char *vram, int xsize, int x, int y, char c, char *font){
   for(i = 0; i < 16; i++){
     p = vram + (y + i) * xsize + x;
     d = font[i];
-    if((d & 0x80) != 0){p[0] = c;}
-    if((d & 0x40) != 0){p[1] = c;}
-    if((d & 0x20) != 0){p[2] = c;}
-    if((d & 0x10) != 0){p[3] = c;}
-    if((d & 0x08) != 0){p[4] = c;}
-    if((d & 0x04) != 0){p[5] = c;}
-    if((d & 0x02) != 0){p[6] = c;}
-    if((d & 0x01) != 0){p[7] = c;} 
+    if((d & 0x80) != 0){ p[0] = c; }
+    if((d & 0x40) != 0){ p[1] = c; }
+    if((d & 0x20) != 0){ p[2] = c; }
+    if((d & 0x10) != 0){ p[3] = c; }
+    if((d & 0x08) != 0){ p[4] = c; }
+    if((d & 0x04) != 0){ p[5] = c; }
+    if((d & 0x02) != 0){ p[6] = c; }
+    if((d & 0x01) != 0){ p[7] = c; }
   }
   return;
 }
 
-void putfont8_asc(char *vram, int xsize, int x, int y, char c, unsigned char *s){
+void putfonts8_asc(char *vram, int xsize, int x, int y, char c, unsigned char *s){
   extern char hankaku[4096];
   for(; *s != 0x00; s++){
     putfont8(vram, xsize, x, y, c, hankaku + *s * 16);
@@ -114,6 +114,7 @@ void init_mouse_cursor8(char *mouse, char bc){
     ".............***"
   };
   int x, y;
+
   for(y = 0; y < 16; y++){
     for(x = 0; x < 16; x++){
       if(cursor[y][x] == '*'){
@@ -131,7 +132,7 @@ void init_mouse_cursor8(char *mouse, char bc){
 }
 
 void putblock8_8(char *vram, int vxsize, int pxsize,
-    int pysize, int px0, int py0, char *buf, int bxsize){
+  int pysize, int px0, int py0, char *buf, int bxsize){
   int x, y;
   for(y = 0; y < pysize; y++){
     for(x = 0; x < pxsize; x++){
@@ -140,5 +141,3 @@ void putblock8_8(char *vram, int vxsize, int pxsize,
   }
   return;
 }
-
-
