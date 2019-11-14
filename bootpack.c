@@ -1,5 +1,5 @@
-#include "bootpack.h"
 #include <stdio.h>
+#include "bootpack.h"
 
 extern struct FIFO8 keyfifo;
 void enable_mouse(void);
