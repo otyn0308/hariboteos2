@@ -3,6 +3,7 @@
 
 struct MOUSE_DEC{
   unsigned char buf[3], phase;
+  int x, y, btn;
 };
 
 extern struct FIFO8 keyfifo, mousefifo;
@@ -43,11 +44,11 @@ void HariMain(void){
       io_stihlt();
     }else{
       if(fifo8_status(&keyfifo) != 0){
-      i = fifo8_get(&keyfifo);
-      io_sti();
-      sprintf(s, "%02X", i);
-      boxfill8(binfo->vram, binfo->scrnx, COL8_008484, 0, 16, 15, 31);
-      putfonts8_asc(binfo->vram, binfo->scrnx, 0, 16, COL8_FFFFFF, s);
+        i = fifo8_get(&keyfifo);
+        io_sti();
+        sprintf(s, "%02X", i);
+        boxfill8(binfo->vram, binfo->scrnx, COL8_008484, 0, 16, 15, 31);
+        putfonts8_asc(binfo->vram, binfo->scrnx, 0, 16, COL8_FFFFFF, s);
       }else if(fifo8_status(&mousefifo) != 0){
         i = fifo8_get(&mousefifo);
         io_sti();
