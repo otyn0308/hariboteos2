@@ -30,7 +30,7 @@ void HariMain(void){
   sprintf(s, "(%3d, %3d)", mx, my);
   putfonts8_asc(binfo->vram, binfo->scrnx, 0, 0, COL8_FFFFFF, s);
 
-  i = memtest(0x00400000, 0xbfffffff);
+  i = memtest(0x00400000, 0xbfffffff) / (1024 * 1024);
   sprintf(s, "memory %dMB", i);
   putfonts8_asc(binfo->vram, binfo->scrnx, 0, 32, COL8_FFFFFF, s);
 
