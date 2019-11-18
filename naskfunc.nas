@@ -156,7 +156,7 @@ _memtest_sub:
         PUSH    EBX
         MOV     ESI,0xaa55aa55
         MOV     EDI,0x55aa55aa
-        MOV     EAX[ESP+12+4]
+        MOV     EAX,[ESP+12+4]
 
 mts_loop:
         MOV     EBX,EAX
@@ -177,7 +177,6 @@ mts_loop:
         POP     ESI
         POP     EDI
         RET
-
 mts_fin:
         MOV     [EBX],EDX
         POP     EBX
