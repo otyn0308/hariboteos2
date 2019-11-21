@@ -3,7 +3,7 @@
 
 void HariMain(void){
   struct BOOTINFO *binfo = (struct BOOTINFO *) ADR_BOOTINFO;
-  char s[40], mcursor[256], keybuf[32], mousebuf[128];
+  char s[40], keybuf[32], mousebuf[128];
   int mx, my, i;
   unsigned int memtotal;
   struct MOUSE_DEC mdec;
@@ -32,7 +32,8 @@ void HariMain(void){
   sht_back = sheet_alloc(shtctl);
   sht_mouse = sheet_alloc(shtctl);
   buf_back = (unsigned char *) memman_alloc_4k(memman, binfo->scrnx * binfo->scrny);
-  sheet_setbuf(sht_back, buf_back, binfo->scrnx, binfo->scrny);
+  sheet_setbuf(sht_back, buf_back, binfo->scrnx, binfo->scrny, -1);
+  sheet_setbuf(sht_mouse, buf_mouse, 16, 16, 99);
   init_screen8(binfo->vram, binfo->scrnx, binfo->scrny);
   init_mouse_cursor8(buf_mouse, 99);
   sheet_slide(shtctl, sht_back, 0, 0);
@@ -75,7 +76,7 @@ void HariMain(void){
             s[2] = 'C';
           }
           boxfill8(buf_back, binfo->scrnx, COL8_008484, 32, 16, 32 + 15 * 8 - 1, 31);
-          putfonts8_asc(baf_back, binfo->scrnx, 32, 16, COL8_FFFFFF, s);
+          putfonts8_asc(buf_back, binfo->scrnx, 32, 16, COL8_FFFFFF, s);
           mx += mdec.x;
           my += mdec.y;
           if(mx < 0){
