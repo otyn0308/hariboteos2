@@ -8,8 +8,10 @@ graphic.nas
 dsctbl.nas
 int.nas
 fifo.nas
-keyboard.obj
-mouse.obj
+keyboard.nas
+mouse.nas
+memory.nas
+sheet.nas
 bootpack.map
 bootpack.bim
 bootpack.hrb
