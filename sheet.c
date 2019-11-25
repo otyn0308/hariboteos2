@@ -72,7 +72,7 @@ void sheet_refreshmap(struct SHTCTL *ctl, int vx0, int vy0, int vx1, int vy1, in
       vy = sht->vy0 + by;
       for(bx = bx0; bx < bx1; bx++){
         vx = sht->vx0 + bx;
-        if(buf[bx * sht->bxsize + bx] != sht->col_inv){
+        if(buf[by * sht->bxsize + bx] != sht->col_inv){
           map[vy * ctl->xsize + vx] = sid;
         }
       }
@@ -181,7 +181,7 @@ void sheet_slide(struct SHEET *sht, int vx0, int vy0){
     sheet_refreshmap(ctl, old_vx0, old_vy0, old_vx0 + sht->bxsize, old_vy0 + sht->bysize, 0);
     sheet_refreshmap(ctl, vx0, vy0, vx0 + sht->bxsize, vy0 + sht->bysize, sht->height);
     sheet_refreshsub(ctl, old_vx0, old_vy0, old_vx0 + sht->bxsize, old_vy0 + sht->bysize, 0, sht->height - 1);
-    sheet_refreshsub(ctl, vx0, vy0, vx0 + sht->bxsize, vx0 + sht->bysize, sht->height, sht->height);
+    sheet_refreshsub(ctl, vx0, vy0, vx0 + sht->bxsize, vy0 + sht->bysize, sht->height, sht->height);
   }
   return;
 }
