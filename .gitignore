@@ -12,6 +12,7 @@ keyboard.nas
 mouse.nas
 memory.nas
 sheet.nas
+timer.nas
 bootpack.map
 bootpack.bim
 bootpack.hrb
