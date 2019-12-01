@@ -1,7 +1,7 @@
 #include "bootpack.h"
 
-#define PIT_CTRL        0x0043
-#define PIT_CNT0        0x0040
+#define PIT_CTRL    0x0043
+#define PIT_CNT0    0x0040
 
 struct TIMERCTL timerctl;
 
@@ -90,4 +90,3 @@ void inthandler20(int *esp){
   }
   return;
 }
-

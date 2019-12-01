@@ -8,12 +8,12 @@ void inthandler2c(int *esp){
   io_out8(PIC1_OCW2, 0x64);
   io_out8(PIC0_OCW2, 0x62);
   data = io_in8(PORT_KEYDAT);
-  fifo32_put(&mousefifo, data + mousedata0);
+  fifo32_put(mousefifo, data + mousedata0);
   return;
 }
 
-#define KEYCMD_SENDTO_MOUSE    0xd4
-#define MOUSECMD_ENABLE      0xf4
+#define KEYCMD_SENDTO_MOUSE     0xd4
+#define MOUSECMD_ENABLE         0xf4
 
 void enable_mouse(struct FIFO32 *fifo, int data0, struct MOUSE_DEC *mdec){
   mousefifo = fifo;

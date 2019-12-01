@@ -66,8 +66,8 @@ void HariMain(void){
   sheet_updown(sht_mouse, 2);
   sprintf(s, "(%3d, %3d)", mx, my);
   putfonts8_asc_sht(sht_back, 0, 0, COL8_FFFFFF, COL8_008484, s, 10);
-  sprintf(s, "memory %dMB  free : %dKB", 
-      memtotal / (1024 *1024), memman_total(memman) / 1024);
+  sprintf(s, "memory %dMB   free : %dKB",
+      memtotal / (1024 * 1024), memman_total(memman) / 1024);
   putfonts8_asc_sht(sht_back, 0, 32, COL8_FFFFFF, COL8_008484, s, 40);
 
   for(;;){
@@ -115,7 +115,7 @@ void HariMain(void){
         }
       }else if(i == 10){
         putfonts8_asc_sht(sht_back, 0, 64, COL8_FFFFFF, COL8_008484, "10[sec]", 7);
-        sprintf(s, "%10d", count);
+        sprintf(s, "%010d", count);
         putfonts8_asc_sht(sht_win, 40, 28, COL8_000000, COL8_C6C6C6, s, 10);
       }else if(i == 3){
         putfonts8_asc_sht(sht_back, 0, 80, COL8_FFFFFF, COL8_008484, "3[sec]", 6);
@@ -168,7 +168,7 @@ void make_window8(unsigned char *buf, int xsize, int ysize, char *title){
   for(y = 0; y < 14; y++){
     for(x = 0; x < 16; x++){
       c = closebtn[y][x];
-      if(c == '@') {
+      if(c == '@'){
         c = COL8_000000;
       }else if(c == '$'){
         c = COL8_848484;
